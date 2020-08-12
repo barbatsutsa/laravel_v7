@@ -59,7 +59,7 @@
         </div>
     </header>
 
-    <x-menu :categories="$categories"></x-menu>
+    <x-menu></x-menu>
 {{--    @include('inc.messages', ['message' => 'some text'])--}}
 
 

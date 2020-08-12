@@ -5,48 +5,28 @@ namespace App\Http\Controllers;
 use App\Http\Requests\NewsCreateRequest;
 use App\Http\Requests\NewsOrderRequest;
 use App\Http\Requests\NewsReviewRequest;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $news = $this->news;
-        $fileName = storage_path('app/news.txt');
-        if(file_exists($fileName)) {
-            $file = file_get_contents($fileName);
-            $newsFile = json_decode($file, true);
-        }
-        if(isset($newsFile) && !empty($newsFile)) {
-            $news = $newsFile;
-        }
+        $news = (new News())->getAll();
         return view('news.index', [
-            'newsList'   => $news,
-			'categories' => $this->categories
+            'newsList'   => $news
         ]);
-
     }
 
     public function show(int $id)
     {
-        $news = $this->news[$id-1] ?? [];
-
-        $fileName = storage_path('app/news.txt');
-        if(file_exists($fileName)) {
-            $file = file_get_contents($fileName);
-            $newsFile = json_decode($file, true);
-        }
-        if(isset($newsFile) && !empty($newsFile)) {
-            $news = $newsFile[$id-1];
-        }
-
+        $news = (new News())->getById($id);
         if(empty($news)) {
             abort(404, 'News not found');
         }
         return view('news.show', [
-            'news'       => $news,
-            'categories' => $this->categories
-        ]);
+            'news'       => $news
+        ]);;
     }
 
     public function review()
