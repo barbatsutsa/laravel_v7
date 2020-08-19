@@ -7,7 +7,7 @@
     <div class="p-4">
         <h4 class="font-italic">Обратная связь</h4>
         <ol class="list-unstyled">
-            <li><a href="{{ route('news.review') }}">Оставить отзыв</a></li>
+            <li><a href="{{ route('feedback.create') }}">Оставить отзыв</a></li>
             <li><a href="{{ route('news.order') }}">Заказать новости</a></li>
         </ol>
     </div>

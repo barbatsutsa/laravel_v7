@@ -1,14 +1,10 @@
 @extends('layouts.index')
 @section('content')
     <h3 class="pb-4 mb-4 font-italic border-bottom">
-        Новости
+        Категория {{ $category->title }}
     </h3>
-    @if(session()->has('success'))
-        <strong>{{ session()->get('success') }}</strong>
-        <hr>
-    @endif
 
-    @forelse($newsList as $news)
+    @forelse($category->news as $news)
         <div class="blog-post">
             <h2 class="blog-post-title"><a href="{{ route('news', ['id' => $news->id]) }}">{{ $news->title }}</a></h2>
             <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
@@ -19,8 +15,4 @@
     @endforelse
 
 
-    <nav class="blog-pagination">
-        {{ $newsList->links() }}
-    </nav>
 @stop
-

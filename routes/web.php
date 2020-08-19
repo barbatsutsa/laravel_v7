@@ -17,11 +17,17 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
+Route::get('/categories', function() {
+    $c = \App\Models\Category::with('news')->get();
+    dd($c);
+});
 Route::get('/', 'NewsController@index')
      ->name('index');
+Route::get('/category/{category}', 'CategoryController@show')->name('category');
 Route::get('/news/{id}.html', 'NewsController@show')
     ->where('id', '\d+')
-    ->name('news.show');
+    ->name('news');
+
 Route::get('/news/review', 'NewsController@review')
     ->name('news.review');
 Route::post('/news/review/store', 'NewsController@storeReview')
@@ -36,17 +42,23 @@ Route::post('/news/order/store', 'NewsController@storeOrder')
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/', 'Admin\IndexController@index')
         ->name('admin');
-    Route::get('/news', 'Admin\NewsController@index')
-        ->name('admin.news');
-    Route::get('/news/create', 'Admin\NewsController@create')
-        ->name('admin.news.create');
-    Route::post('/news/store', 'Admin\NewsController@store')
-        ->name('admin.news.store');
-    Route::get('/news/{id}/edit', 'Admin\NewsController@edit')
-        ->where('id', '\d+')
-        ->name('admin.news.edit');
+    Route::resource('/news', 'Admin\NewsController');
+
+    Route::resource('/feedback', 'Admin\FeedbackController');
+
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/collections', function() {
+    $collection = collect([
+        100,
+        200,
+        500,
+        900,
+        1200
+    ]);
+
+    $collection->dd(1);
+});

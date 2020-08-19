@@ -7,15 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     protected $table = "categories";
+    protected $primaryKey = "id";
 
-    public function getAll(): array
-    {
-        return \DB::select("select id, title, description from categories");
-    }
+    protected $fillable = ['title', 'slug', 'description'];
 
-    public function getById(int $id)
+    public function news()
     {
-        return \DB::selectOne("select id, title, description from categories where id = :id",
-            ['id' => $id]);
+        return $this->belongsToMany(News::class, 'categories_has_news',
+            'category_id', 'news_id');
     }
 }

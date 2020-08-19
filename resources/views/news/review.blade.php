@@ -2,7 +2,7 @@
 @section('content')
     <div class="col-md-4  offset-2">
         <h1>Добавить отзыв</h1><br>
-        <form method="post" action="{{ route('news.review.store') }}">
+        <form method="post" action="{{ route('feedback.store') }}">
             @csrf
             <p><input type="text" class="form-control" name="name"  placeholder="Ваше имя" value="{{ old('name') }}">
                 @error('name') Заполните это поле @enderror

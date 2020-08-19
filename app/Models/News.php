@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     protected $table = "news";
+    protected $primaryKey = "id";
 
-    public function getAll(): array
+    protected $fillable = ['img', 'title', 'slug', 'description'];
+    //protected $guarded = ['id'];
+
+    public function categories()
     {
-        return \DB::table($this->table)->select('id', 'title', 'description')->orderBy('slug', 'desc')->get()->toArray();
+        return $this->belongsTo(Category::class);
     }
 
-    public function getById(int $id)
-    {
-        return \DB::table($this->table)->find($id);
-    }
 }
