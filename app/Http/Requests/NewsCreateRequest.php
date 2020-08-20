@@ -24,7 +24,24 @@ class NewsCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required'
+            'title'       => ['required', 'string', 'min:5', 'max:100'],
+            'img'         => ['required', 'string', 'url'],
+            'slug'        => ['sometimes'],
+            'description' => ['required', 'string']
         ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title'       => 'заголовок',
+            'img'         => 'изображение',
+            'description' => 'описание'
+        ];
+    }
+
+    public function messages()
+    {
+        return ['url' => 'Это поле должно быть url'];
     }
 }

@@ -24,8 +24,16 @@ class NewsOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'phone' => 'required',
-            'info' => 'required'
+            'phone' => ['required', 'digits:12'],
+            'info' => ['required', 'string']
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'phone'       => 'номер телефона',
+            'info'        => 'необходимая информация'
         ];
     }
 }

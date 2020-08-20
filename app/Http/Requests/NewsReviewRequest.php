@@ -24,8 +24,16 @@ class NewsReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'review' => 'required'
+            'name'   => ['required', 'string', 'min:5', 'max:100'],
+            'review' => ['required', 'string']
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name'       => 'имя',
+            'review'     => 'отзыв'
         ];
     }
 }

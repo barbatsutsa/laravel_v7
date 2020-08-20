@@ -6,11 +6,23 @@
             @csrf
             <p><input type="text" class="form-control" name="name"  placeholder="Ваше имя" value="{{ old('name') }}"></p>
             <p><input type="phone" class="form-control" name="phone"  placeholder="Номер телефона для связи" value="{{ old('phone') }}">
-                @error('phone') Заполните это поле @enderror
+                @error('phone')
+                    <div class="alert alert-danger">
+                        @foreach($errors->get('name') as $error)
+                            <p>{{ $error }} </p>
+                        @endforeach
+                    </div>
+                @enderror
             </p>
             <p><input type="text" class="form-control" name="email"  placeholder="Ваш e-mail" value="{{ old('email') }}"></textarea></p>
             <p><textarea class="form-control" name="info" placeholder="Укажите, какую информацию Вы хотели бы получить" {!! old('info') !!}></textarea>
-                @error('info') Заполните это поле @enderror
+                @error('phone')
+                <div class="alert alert-danger">
+                    @foreach($errors->get('info') as $error)
+                        <p>{{ $error }} </p>
+                    @endforeach
+                </div>
+            @enderror
             </p>
             <button type="submit" class="btn btn-success">Отправить</button>
         </form>

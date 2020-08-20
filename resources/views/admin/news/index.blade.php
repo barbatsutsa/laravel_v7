@@ -14,7 +14,7 @@
         <div>
             <h2>{{ $news->title }}</h2>
             <a href=" {{ route('news.edit', ['news' => $news]) }}">Редактировать</a>
-            <a href=" {{ route('news.destroy', ['news' => $news->id]) }}">Удалить</a>
+            <a href=" {{ route('news.destroy', ['news' => $news]) }}">Удалить</a>
             <hr>
         </div>
     @empty
