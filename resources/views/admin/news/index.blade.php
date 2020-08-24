@@ -3,7 +3,8 @@
 <div>
     <a href="{{ route('news.create') }}">Добавить новость</a>
     <br>
-    <a href="{{ route('admin') }}">В админку</a>
+    <a href="{{ route('admin') }}">В админку</a> <br>
+
 </div>
 <br>
 @if(session()->has('success'))
@@ -15,6 +16,8 @@
             <h2>{{ $news->title }}</h2>
             <a href=" {{ route('news.edit', ['news' => $news]) }}">Редактировать</a>
             <a href=" {{ route('news.destroy', ['news' => $news]) }}">Удалить</a>
+
+
             <hr>
         </div>
     @empty

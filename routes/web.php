@@ -39,13 +39,20 @@ Route::post('/news/order/store', 'NewsController@storeOrder')
 
 
 //for admin
-Route::group(['prefix' => 'admin'], function() {
-    Route::get('/', 'Admin\IndexController@index')
-        ->name('admin');
-    Route::resource('/news', 'Admin\NewsController');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/account', 'Account\IndexController@index')->name('account');
 
-    Route::resource('/feedback', 'Admin\FeedbackController');
+    Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function() {
+        Route::get('/', 'Admin\IndexController@index')
+            ->name('admin');
+        Route::resource('/news', 'Admin\NewsController');
 
+        Route::match(['post', 'get'], '/profile', 'Admin\ProfileController@update')
+            ->name('admin.profile.update');
+
+        Route::resource('/feedback', 'Admin\FeedbackController');
+
+    });
 });
 
 Auth::routes();
@@ -61,4 +68,12 @@ Route::get('/collections', function() {
     ]);
 
     $collection->dd(1);
+});
+
+Route::get('/session', function () {
+    if(session()->has('test')) {
+        dd(session()->all());
+    }
+    session(['test' => 'Моя сессия']);
+    return redirect('/session');
 });
