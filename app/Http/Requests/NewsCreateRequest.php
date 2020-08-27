@@ -27,7 +27,9 @@ class NewsCreateRequest extends FormRequest
             'title'       => ['required', 'string', 'min:5', 'max:100'],
             'img'         => ['required', 'string', 'url'],
             'slug'        => ['sometimes'],
-            'description' => ['required', 'string']
+            'description' => ['required', 'string'],
+            'link'        => ['sometimes','string', 'url'],
+            'pub_date'    => ['sometimes','timestamp'],
         ];
     }
 
@@ -36,7 +38,9 @@ class NewsCreateRequest extends FormRequest
         return [
             'title'       => 'заголовок',
             'img'         => 'изображение',
-            'description' => 'описание'
+            'description' => 'описание',
+            'link'        => 'ссылка',
+            'pub_date'    => 'дата публикации',
         ];
     }
 

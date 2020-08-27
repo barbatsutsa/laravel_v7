@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserEvent;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -50,5 +51,6 @@ class LoginController extends Controller
     {
         //$user->is_admin = true;
         //$user->save();
+        event(new UserEvent($user));
     }
 }

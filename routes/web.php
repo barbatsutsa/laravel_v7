@@ -52,6 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('/feedback', 'Admin\FeedbackController');
 
+        Route::get('/add', 'Admin\NewsController@add')
+            ->name('admin.add');
+
     });
 });
 
@@ -70,10 +73,12 @@ Route::get('/collections', function() {
     $collection->dd(1);
 });
 
-Route::get('/session', function () {
-    if(session()->has('test')) {
-        dd(session()->all());
-    }
-    session(['test' => 'Моя сессия']);
-    return redirect('/session');
-});
+Route::get('/parsing/news', 'ParserController@index')->name('news.parser');
+Route::get('/parsing/{cat}', 'ParserController@add')->name('news.parser.add');
+
+//auth socialite
+Route::get('/auth/vk', 'Auth\SocialController@loginVK')->name('vk.login');
+Route::get('/auth/vk/callback', 'Auth\SocialController@callbackVK')->name('vk.callback');
+
+Route::get('/auth/fb', 'Auth\SocialController@loginFB')->name('fb.login');
+Route::get('/auth/fb/callback', 'Auth\SocialController@callbackFB')->name('fb.callback');

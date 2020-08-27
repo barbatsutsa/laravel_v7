@@ -41,6 +41,9 @@
 
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
+                                <a href="{{ route('vk.login') }}">Войти через VK</a>
+                                <br>
+                                <a href="{{ route('fb.login') }}">Войти через FB</a>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
