@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', 'Admin\IndexController@index')
             ->name('admin');
         Route::resource('/news', 'Admin\NewsController');
+        Route::resource('/resourses', 'Admin\ResourceController');
 
         Route::match(['post', 'get'], '/profile', 'Admin\ProfileController@update')
             ->name('admin.profile.update');
@@ -74,7 +75,9 @@ Route::get('/collections', function() {
 });
 
 Route::get('/parsing/news', 'ParserController@index')->name('news.parser');
-Route::get('/parsing/{cat}', 'ParserController@add')->name('news.parser.add');
+//Route::get('/parsing/{cat}', 'ParserController@add')->name('news.parser.add');
+Route::get('/parsing/resourses', 'ParserController@res')->name('news.resourses.add');
+
 
 //auth socialite
 Route::get('/auth/vk', 'Auth\SocialController@loginVK')->name('vk.login');

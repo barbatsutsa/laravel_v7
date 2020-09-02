@@ -11,7 +11,9 @@
     @forelse($newsList as $news)
         <div class="blog-post">
             <h2 class="blog-post-title"><a href="{{ route('news', ['id' => $news->id]) }}">{{ $news->title }}</a></h2>
-            <p class="blog-post-meta">December 23, 2013 by <a href="#">Jacob</a></p>
+            @if($news->created_at)
+                <p class="blog-post-meta">{{ $news->created_at->format('d-m-Y H:i') }}   от <a href="#">Админ</a></p>
+            @endif
             <p>{!! mb_substr($news->description, 0, 200) !!}</p>
         </div><!-- /.blog-post -->
     @empty

@@ -42,6 +42,16 @@ class NewsController extends Controller
     {
 
         $data = $request->validated();
+        if($request->hasFile('img')) {
+            $file = $request->file('img');
+            $name = $file->getClientOriginalName();
+
+            $upload = $file->storeAs('news', $name);
+            if($upload) {
+                $data['img'] = $upload;
+            }
+        }
+
         if (!$data['slug']) {
             $data['slug'] = Str::slug($data['title'], "-");
         }
@@ -109,7 +119,7 @@ class NewsController extends Controller
     {
         $news->categories()->detach($category_id);
         $news->delete();
-        return redirect()->route('news.index')->with('success', 'Новость успешно удалена');
+        return redirect()->route('admin.news.index')->with('success', 'Новость успешно удалена');
     }
 
     public function add()

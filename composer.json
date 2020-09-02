@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "ext-json": "*",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -17,8 +18,10 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "orchestra/parser": "^5.0",
+        "predis/predis": "^1.1",
         "socialiteproviders/facebook": "^1.0",
-        "socialiteproviders/vkontakte": "^4.1"
+        "socialiteproviders/vkontakte": "^4.1",
+        "unisharp/laravel-filemanager": "~1.8"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.4",

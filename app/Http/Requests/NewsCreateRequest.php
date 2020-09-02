@@ -25,7 +25,7 @@ class NewsCreateRequest extends FormRequest
     {
         return [
             'title'       => ['required', 'string', 'min:5', 'max:100'],
-            'img'         => ['required', 'string', 'url'],
+            'img'         => ['required', 'image', 'mimes:jpeg,bmp,png'],
             'slug'        => ['sometimes'],
             'description' => ['required', 'string'],
             'link'        => ['sometimes','string', 'url'],
